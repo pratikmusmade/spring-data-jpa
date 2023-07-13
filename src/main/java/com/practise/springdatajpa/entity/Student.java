@@ -14,12 +14,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(
 		//change the name of the table 
@@ -66,6 +64,20 @@ public class Student {
 	 */
 	@Embedded
 	private Guardian guardian;
+
+
+	@Override
+	public String toString() {
+		return "Student -->[ \n"+
+			    "			studentId= " + studentId + ",\n"+
+				"		 	firstName=" + firstName + ",\n"+
+				"		 	middleName=" + middleName+ ",\n"+
+				"		 	lastName=" + lastName + ",\n" +
+				"		 	emailId=" + emailId + ",\n" +
+				"		 	guardian=" + guardian +"\n"
+				+ "	   ],\n\n";
+	}
 	
 
+	
 }
