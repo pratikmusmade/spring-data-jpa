@@ -16,16 +16,18 @@ import com.practise.springdatajpa.entity.Student;
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Long> {
 
-	//using the existing className combinations in JPA to get data by firstName
+	//Using the existing className combinations in JPA to get data by firstName
 	Student findByFirstName(String firstName);
 	List<Student> findByFirstNameContaining(String firstName);
 	
-	//accessing data using JPQL
+	//Accessing data using JPQL
 	@Query("select s.id from Student s where firstName = :name")
 	long getIdByFirstName(@Param("name") String name);
 	
 	
-	//Updating the Data using Native Query
+	//Updating the Data using Native Query 
+	//To Update we have to use @Modifying 
+	//@Transactional is used to initiate the translation
 	@Modifying
 	@Transactional
 	@Query(
@@ -34,6 +36,7 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 			)
 	int updateFirstNameByEmail(@Param("firstName") String firstName,@Param("email") String email);
 	
+	//Native Query
 	@Query(
 			value="select * from student_tbl s where s.last_name = :lastName",
 			nativeQuery = true
